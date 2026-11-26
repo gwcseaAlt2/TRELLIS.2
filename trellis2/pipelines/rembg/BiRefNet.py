@@ -5,8 +5,19 @@ from torchvision import transforms
 from PIL import Image
 
 
+# Background-removal weights that are licensed for non-commercial use only
+# (e.g. briaai/RMBG-2.0 is CC BY-NC 4.0). If a pipeline config asks for one of
+# these, fall back to the MIT-licensed BiRefNet weights instead.
+COMMERCIAL_SAFE_MODEL = "ZhengPeng7/BiRefNet"
+NON_COMMERCIAL_PREFIXES = ("briaai/",)
+
+
 class BiRefNet:
-    def __init__(self, model_name: str = "ZhengPeng7/BiRefNet"):
+    def __init__(self, model_name: str = COMMERCIAL_SAFE_MODEL):
+        if model_name.lower().startswith(NON_COMMERCIAL_PREFIXES):
+            print(f"[BiRefNet] '{model_name}' is licensed for non-commercial use only; "
+                  f"using '{COMMERCIAL_SAFE_MODEL}' (MIT) instead.")
+            model_name = COMMERCIAL_SAFE_MODEL
         self.model = AutoModelForImageSegmentation.from_pretrained(
             model_name, trust_remote_code=True
         )
