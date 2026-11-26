@@ -311,6 +311,8 @@ TRELLIS.2 is built upon several specialized high-performance packages developed 
 
 ## ⚖️ License
 
+> **Fork note:** this fork's image-to-GLB path no longer needs nvdiffrast or non-commercial background-removal weights. See [COMMERCIAL_USE.md](COMMERCIAL_USE.md).
+
 This model and code are released under the **[MIT License](LICENSE)**.
 
 Please note that certain dependencies operate under separate license terms:
